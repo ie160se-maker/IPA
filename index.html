@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPA【極】マスターガイド</title>
+  <meta name="description" content="IPAの母音・子音をカテゴリー別に学べる、GitHub Pages配置向けの発音ガイドです。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">IPA PRONUNCIATION LIBRARY</div>
+        <h1><span class="accent">IPA【極】</span>完全マスターガイド</h1>
+        <p class="hero-copy">
+          母音・子音を資料のカテゴリーに沿って整理した、GitHub Pages公開向けの発音学習サイトです。
+          音声はあとから差し替えられるよう、分かりやすいダミーパス命名規則で実装しています。
+        </p>
+        <div class="hero-meta">
+          <span>単一母音 / 二重母音 / 重要母音</span>
+          <span>破裂音 / 鼻音 / 破擦音 / 摩擦音 / 接近音 / 側面接近音 / 重要子音</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky-nav" aria-label="セクションナビゲーション">
+    <div class="wrap nav-inner" id="quickNav"></div>
+  </nav>
+
+  <main class="wrap main-content">
+    <section class="notice-card" aria-label="音声ファイルガイド">
+      <h2>音声ファイル差し替えガイド</h2>
+      <p>
+        単音は <code>assets/audio/ipa/{audioId}/ipa-single.mp3</code>、単語音声は
+        <code>assets/audio/ipa/{audioId}/word-01-{wordSlug}.mp3</code> の形式で参照します。
+        同じIPAが複数セクションに出てきても、音声フォルダは共通です。
+      </p>
+      <p id="audioStatus" class="audio-status">音声未設定時はコンソールに参照先パスを表示します。</p>
+    </section>
+
+    <div id="sectionsRoot"></div>
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>GitHub Pages Ready · HTML / CSS / JavaScript 分離構成 · 音声は assets/audio 配下へ追加してください</p>
+  </footer>
+
+  <script src="./assets/js/ipa-data.js"></script>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
