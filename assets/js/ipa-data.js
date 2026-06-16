@@ -213,3 +213,15 @@ const IPA_ITEMS = {
   r: { symbol: '/r/', reading: '接近音 r', hint: 'red の子音', type: 'cons', level: 'focus', audioId: 'cons-r', tip: '舌先をどこにも触れさせず、少し後ろへ引いて響きを作ります。', words: [ { word: 'red', ipa: '/red/', meaning: '赤い', slug: 'red' }, { word: 'rain', ipa: '/reɪn/', meaning: '雨', slug: 'rain' }, { word: 'right', ipa: '/raɪt/', meaning: '右', slug: 'right' } ] },
   l: { symbol: '/l/', reading: '側面接近音 l', hint: 'lips の子音', type: 'cons', level: 'focus', audioId: 'cons-l', tip: '舌先を歯茎につけ、舌の両側から息を逃がします。', words: [ { word: 'lips', ipa: '/lɪps/', meaning: '唇', slug: 'lips' }, { word: 'light', ipa: '/laɪt/', meaning: '光', slug: 'light' }, { word: 'feel', ipa: '/fiːl/', meaning: '感じる', slug: 'feel' } ] }
 };
+
+const IPA_SECTIONS = [
+  { id: 'short-vowels', badge: '母音', badgeClass: 'vowel', title: '単一母音（短母音）', subtitle: 'Short Monophthongs', itemIds: ['short_i','short_e','short_ae','short_ox','short_caret','short_uu','short_schwa','short_eps'] },
+  { id: 'long-vowels', badge: '母音', badgeClass: 'vowel', title: '単一母音（長母音）', subtitle: 'Long Monophthongs', itemIds: ['long_i','long_aa','long_u','long_open_o','long_schwa_r'] },
+  { id: 'diphthongs', badge: '母音', badgeClass: 'vowel', title: '二重母音', subtitle: 'Diphthongs', itemIds: ['diph_ai','diph_ou','diph_au','diph_iə','diph_eə','diph_ʊə','diph_ei','diph_oi'] },
+  { id: 'plosives', badge: '子音', badgeClass: 'cons', title: '破裂音', subtitle: 'Plosives', itemIds: ['p','b','t','d','k','g'] },
+  { id: 'nasals', badge: '子音', badgeClass: 'cons', title: '鼻音', subtitle: 'Nasals', itemIds: ['m','n','ng'] },
+  { id: 'affricates', badge: '子音', badgeClass: 'cons', title: '破擦音', subtitle: 'Affricates', itemIds: ['tch','dj'] },
+  { id: 'fricatives', badge: '子音', badgeClass: 'cons', title: '摩擦音', subtitle: 'Fricatives', itemIds: ['f','v','theta','eth','s','z','sh','zh','h'] },
+  { id: 'approximants', badge: '子音', badgeClass: 'cons', title: '接近音', subtitle: 'Approximants', itemIds: ['w','j','r'] },
+  { id: 'lateral', badge: '子音', badgeClass: 'cons', title: '側面接近音', subtitle: 'Lateral Approximants', itemIds: ['l'] },
+};
