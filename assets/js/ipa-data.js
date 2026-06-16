@@ -224,4 +224,4 @@ const IPA_SECTIONS = [
   { id: 'fricatives', badge: '子音', badgeClass: 'cons', title: '摩擦音', subtitle: 'Fricatives', itemIds: ['f','v','theta','eth','s','z','sh','zh','h'] },
   { id: 'approximants', badge: '子音', badgeClass: 'cons', title: '接近音', subtitle: 'Approximants', itemIds: ['w','j','r'] },
   { id: 'lateral', badge: '子音', badgeClass: 'cons', title: '側面接近音', subtitle: 'Lateral Approximants', itemIds: ['l'] },
-};
+];
