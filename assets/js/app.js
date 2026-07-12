@@ -117,12 +117,12 @@ function toggleCard(card) {
 }
 
 function getIpaAudioPath(item) {
-  return `assets/audio/ipa/${item.audioId}/ipa-single.mp3`;
+  return `assets/audio/ipa/${item.audioId}/ipa-single.m4a`;
 }
 
 function getWordAudioPath(item, word, index) {
   const order = String(index + 1).padStart(2, '0');
-  return `assets/audio/ipa/${item.audioId}/word-${order}-${word.slug}.mp3`;
+  return `assets/audio/ipa/${item.audioId}/word-${order}-${word.slug}.m4a`;
 }
 
 function playAudio(path, label) {
