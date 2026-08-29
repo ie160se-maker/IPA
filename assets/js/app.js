@@ -162,6 +162,23 @@ init();
 const ACCESS_PASSWORD = 'masaIPAweb';
 const ACCESS_STORAGE_KEY = 'masa-ipa-web-unlocked';
 
+// ストレージが使えない環境（file:// 直開き等）でも止まらないようにする
+function safeStorageGet(key) {
+  try {
+    return sessionStorage.getItem(key);
+  } catch (e) {
+    return null;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch (e) {
+    // ストレージが使えなくても画面は開けるようにする
+  }
+}
+
 function unlockSite() {
   document.body.classList.remove('is-locked');
   document.body.classList.add('is-unlocked');
@@ -169,7 +186,7 @@ function unlockSite() {
   const gateScreen = document.getElementById('gateScreen');
   if (siteShell) siteShell.setAttribute('aria-hidden', 'false');
   if (gateScreen) gateScreen.setAttribute('aria-hidden', 'true');
-  sessionStorage.setItem(ACCESS_STORAGE_KEY, 'true');
+  safeStorageSet(ACCESS_STORAGE_KEY, 'true');
 }
 
 function lockSite() {
@@ -186,22 +203,25 @@ function bindPasswordGate() {
   const passwordInput = document.getElementById('passwordInput');
   const gateError = document.getElementById('gateError');
 
-  const isUnlocked = sessionStorage.getItem(ACCESS_STORAGE_KEY) === 'true';
+  // ゲート用のHTMLが見つからない場合は、ロックを外してサイトを表示する（保険）
+  if (!gateForm || !passwordInput) {
+    document.body.classList.remove('is-locked');
+    return;
+  }
 
-  if (isUnlocked) {
+  // すでにこのタブで解除済みなら、そのまま開く
+  if (safeStorageGet(ACCESS_STORAGE_KEY) === 'true') {
     unlockSite();
   } else {
     lockSite();
-    setTimeout(function () { if (passwordInput) passwordInput.focus(); }, 50);
+    passwordInput.focus();
   }
 
-  if (!gateForm) return;
-
+  // ★ 重要：ここより前で絶対に止まらないようにしたので、必ずここまで到達する
   gateForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    const inputValue = passwordInput ? passwordInput.value : '';
 
-    if (inputValue === ACCESS_PASSWORD) {
+    if (passwordInput.value === ACCESS_PASSWORD) {
       if (gateError) gateError.textContent = '';
       unlockSite();
       passwordInput.value = '';
@@ -209,14 +229,11 @@ function bindPasswordGate() {
     }
 
     if (gateError) gateError.textContent = 'パスワードが違います。もう一度入力してください。';
-    if (passwordInput) {
-      passwordInput.focus();
-      passwordInput.select();
-    }
+    passwordInput.focus();
+    passwordInput.select();
   });
 }
 
 bindPasswordGate();
 
 // ===== パスワードゲート（追記ここまで） =====
-
