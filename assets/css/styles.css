@@ -433,3 +433,190 @@ code {
   .ipa-grid { grid-template-columns: 1fr; }
   .word-chip { grid-template-columns: 1fr; }
 }
+
+/* ===== パスワードゲート（追記ここから） ===== */
+
+body.is-locked {
+  overflow: hidden;
+}
+
+.site-shell {
+  transition: opacity .28s ease, filter .28s ease;
+}
+
+body.is-locked .site-shell {
+  opacity: 0;
+  filter: blur(14px);
+  pointer-events: none;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+body.is-unlocked .site-shell {
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+}
+
+body.is-unlocked .gate-screen {
+  display: none;
+}
+
+.gate-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gate-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(182,138,60,0.14), transparent 24%),
+    radial-gradient(circle at top right, rgba(40,91,143,0.16), transparent 26%),
+    linear-gradient(180deg, rgba(243,245,248,0.97), rgba(235,240,246,0.94));
+  backdrop-filter: blur(18px);
+}
+
+.gate-card {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 36px 34px 30px;
+  border-radius: 34px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(247,250,252,0.92));
+  border: 1px solid rgba(255,255,255,0.92);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.gate-card::before,
+.gate-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.gate-card::before {
+  width: 220px;
+  height: 220px;
+  right: -70px;
+  top: -80px;
+  background: radial-gradient(circle, rgba(40,91,143,0.14), transparent 68%);
+}
+
+.gate-card::after {
+  width: 220px;
+  height: 220px;
+  left: -80px;
+  bottom: -120px;
+  background: radial-gradient(circle, rgba(182,138,60,0.14), transparent 68%);
+}
+
+.gate-eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(21,32,43,0.05);
+  border: 1px solid rgba(21,32,43,0.08);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.gate-card h1 {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 12px;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.gate-copy,
+.gate-note {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.85;
+  font-size: 14px;
+}
+
+.gate-form {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+}
+
+.gate-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.gate-input {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  background: rgba(255,255,255,0.94);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.gate-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(40,91,143,0.10);
+  background: #fff;
+}
+
+.gate-button {
+  width: 100%;
+  margin-top: 14px;
+  border: 0;
+  border-radius: 16px;
+  padding: 15px 18px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: transform .2s ease;
+  box-shadow: 0 16px 28px rgba(31,53,82,0.24);
+}
+
+.gate-button:hover {
+  transform: translateY(-1px);
+}
+
+.gate-error {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.gate-note {
+  margin-top: 14px;
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .gate-card { padding: 28px 20px 24px; border-radius: 28px; }
+}
+
+/* ===== パスワードゲート（追記ここまで） ===== */
