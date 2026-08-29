@@ -10,7 +10,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
-<body>
+<body class="is-locked">
+  <!-- ===== パスワードゲート（追記ここから） ===== -->
+  <div class="gate-screen" id="gateScreen" aria-labelledby="gateTitle">
+    <div class="gate-backdrop"></div>
+    <div class="gate-card">
+      <div class="gate-eyebrow">PRIVATE ACCESS</div>
+      <h1 id="gateTitle">IPA【極】完全マスターガイド</h1>
+      <p class="gate-copy">
+        この教材ページはパスワード保護されています。閲覧するには、指定のアクセスコードを入力してください。
+      </p>
+      <form class="gate-form" id="gateForm" novalidate>
+        <label class="gate-label" for="passwordInput">パスワード</label>
+        <input
+          class="gate-input"
+          id="passwordInput"
+          name="password"
+          type="password"
+          placeholder="アクセスコードを入力"
+          autocomplete="current-password"
+          required
+        />
+        <button class="gate-button" type="submit">IPA画面に入る</button>
+        <p class="gate-error" id="gateError" role="alert" aria-live="polite"></p>
+      </form>
+      <p class="gate-note">GitHub Pages向けの簡易ロックです。</p>
+    </div>
+  </div>
+  <!-- ===== パスワードゲート（追記ここまで） ===== -->
+
+  <div class="site-shell" id="siteShell" aria-hidden="true">
+
   <header class="hero">
     <div class="wrap">
       <div class="hero-card">
@@ -49,7 +79,7 @@
   <footer class="site-footer wrap">
     <p>GitHub Pages Ready · HTML / CSS / JavaScript 分離構成 · 音声は assets/audio 配下へ追加してください</p>
   </footer>
-
+  </div><!-- /.site-shell（追記） -->
   <script src="./assets/js/ipa-data.js"></script>
   <script src="./assets/js/app.js"></script>
 </body>
