@@ -156,3 +156,67 @@ function init() {
 }
 
 init();
+
+// ===== パスワードゲート（追記ここから） =====
+
+const ACCESS_PASSWORD = 'masaIPAweb';
+const ACCESS_STORAGE_KEY = 'masa-ipa-web-unlocked';
+
+function unlockSite() {
+  document.body.classList.remove('is-locked');
+  document.body.classList.add('is-unlocked');
+  const siteShell = document.getElementById('siteShell');
+  const gateScreen = document.getElementById('gateScreen');
+  if (siteShell) siteShell.setAttribute('aria-hidden', 'false');
+  if (gateScreen) gateScreen.setAttribute('aria-hidden', 'true');
+  sessionStorage.setItem(ACCESS_STORAGE_KEY, 'true');
+}
+
+function lockSite() {
+  document.body.classList.add('is-locked');
+  document.body.classList.remove('is-unlocked');
+  const siteShell = document.getElementById('siteShell');
+  const gateScreen = document.getElementById('gateScreen');
+  if (siteShell) siteShell.setAttribute('aria-hidden', 'true');
+  if (gateScreen) gateScreen.setAttribute('aria-hidden', 'false');
+}
+
+function bindPasswordGate() {
+  const gateForm = document.getElementById('gateForm');
+  const passwordInput = document.getElementById('passwordInput');
+  const gateError = document.getElementById('gateError');
+
+  const isUnlocked = sessionStorage.getItem(ACCESS_STORAGE_KEY) === 'true';
+
+  if (isUnlocked) {
+    unlockSite();
+  } else {
+    lockSite();
+    setTimeout(function () { if (passwordInput) passwordInput.focus(); }, 50);
+  }
+
+  if (!gateForm) return;
+
+  gateForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const inputValue = passwordInput ? passwordInput.value : '';
+
+    if (inputValue === ACCESS_PASSWORD) {
+      if (gateError) gateError.textContent = '';
+      unlockSite();
+      passwordInput.value = '';
+      return;
+    }
+
+    if (gateError) gateError.textContent = 'パスワードが違います。もう一度入力してください。';
+    if (passwordInput) {
+      passwordInput.focus();
+      passwordInput.select();
+    }
+  });
+}
+
+bindPasswordGate();
+
+// ===== パスワードゲート（追記ここまで） =====
+
