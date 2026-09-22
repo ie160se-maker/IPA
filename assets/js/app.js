@@ -1,5 +1,4 @@
 const sectionsRoot = document.getElementById('sectionsRoot');
-const quickNav = document.getElementById('quickNav');
 const audioStatus = document.getElementById('audioStatus');
 
 function escapeHtml(value) {
@@ -70,11 +69,7 @@ function buildCard(item, badgeClass, domId) {
   `;
 }
 
-function renderQuickNav() {
-  quickNav.innerHTML = IPA_SECTIONS.map(section => `
-    <a class="nav-link" href="#${section.id}">${escapeHtml(section.title)}</a>
-  `).join('');
-}
+
 
 function renderSections() {
   sectionsRoot.innerHTML = IPA_SECTIONS.map(buildSection).join('');
@@ -150,7 +145,6 @@ function setAudioStatus(message) {
 }
 
 function init() {
-  renderQuickNav();
   renderSections();
   bindCardEvents();
 }
